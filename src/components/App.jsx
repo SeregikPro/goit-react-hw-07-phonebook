@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box } from './Box';
 import ContactList from './ContactList';
 import ContactForm from './ContactForm';
 import Filter from './Filter';
+// import { getContacts } from 'redux/useSelectors';
 
 const App = () => {
+  // useEffect(() => {
+  //   getContacts();
+  // }, []);
+
   return (
     <Box display="flex" flexDirection="column" alignItems="center" p={5}>
       <h1>Phonebook</h1>
@@ -20,7 +25,7 @@ const App = () => {
       </Box>
       <Box width="300px">
         <h2>Contacts</h2>
-        <Filter />
+        {/* <Filter /> */}
         <ContactList />
       </Box>
     </Box>

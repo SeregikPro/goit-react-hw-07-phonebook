@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
-import { addContact, getContacts } from 'redux/contactsSlice';
+import { fetchContacts } from 'redux/contactOperations';
+import { addContact } from 'redux/contactOperations';
+import { addContactApi } from 'services/mockApi';
+// import { addContact, getContacts } from 'redux/contactsSlice';
 import { nanoid } from 'nanoid';
 import { Box } from 'components/Box';
 import { Input, Title } from './ContactForm.styled';
@@ -29,25 +32,26 @@ const ContactForm = () => {
     }
   };
 
-  const allContactNames = useSelector(getContacts).map(contact => contact.name);
+  // const allContactNames = useSelector(getContacts).map(contact => contact.name);
 
-  const checkDuplicates = name => {
-    if (allContactNames.includes(name)) {
-      alert(`${name} is already in contacts.`);
-      return true;
-    }
-  };
+  // const checkDuplicates = name => {
+  //   if (allContactNames.includes(name)) {
+  //     alert(`${name} is already in contacts.`);
+  //     return true;
+  //   }
+  // };
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (checkDuplicates(name)) {
-      return;
-    }
+    // if (checkDuplicates(name)) {
+    //   return;
+    // }
 
     const contact = { id: nanoid(), name, number };
 
     dispatch(addContact(contact));
+    // addContactApi(contact).then(res => console.log('res :>>', res));
     reset();
   };
 
