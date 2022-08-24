@@ -11,10 +11,8 @@ const ContactList = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
 
-  // const loading = useSelector(getLoadingStatus);
-
   const filteredContacts = contacts.filter(e =>
-    e.name.toLowerCase().includes(filter)
+    e.name.toLowerCase().includes(filter.toLowerCase())
   );
 
   const deleteContact = id => {

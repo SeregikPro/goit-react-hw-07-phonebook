@@ -9,7 +9,7 @@ const Filter = () => {
   const filter = useSelector(getFilter);
 
   const handleFilter = e => {
-    dispatch(setFilter(e.target.value));
+    dispatch(setFilter(e.target.value.toLowerCase()));
   };
 
   return (

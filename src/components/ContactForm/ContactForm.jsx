@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { addContact } from 'redux/contactOperations';
-import { getContacts } from 'redux/contactSelectors';
+import { getContacts, getLoadingStatus } from 'redux/contactSelectors';
 import { Box } from 'components/Box';
 import { Input, Title } from './ContactForm.styled';
 import Button from 'components/Button';
@@ -13,6 +13,7 @@ const ContactForm = () => {
   const dispatch = useDispatch();
 
   const contacts = useSelector(getContacts);
+  const isLoading = useSelector(getLoadingStatus);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -94,7 +95,7 @@ const ContactForm = () => {
         />
       </label>
 
-      <Button type="submit">Add contact</Button>
+      <Button type="submit">{isLoading ? 'Loading...' : 'Add contact'}</Button>
     </Box>
   );
 };
