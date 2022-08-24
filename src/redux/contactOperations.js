@@ -40,15 +40,3 @@ export const removeContact = createAsyncThunk(
     }
   }
 );
-
-export const setFilter = createAsyncThunk(
-  'contact/filter'
-  //   async (id, { rejectWithValue }) => {
-  //     try {
-  //       const contacts = await removeContactApi(id);
-  //       return contacts;
-  //     } catch (error) {
-  //       return rejectWithValue(error.message);
-  //     }
-  //   }
-);

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { fetchContacts } from 'redux/contactOperations';
 import { addContact } from 'redux/contactOperations';
@@ -16,6 +16,10 @@ const ContactForm = () => {
   const dispatch = useDispatch();
 
   const contacts = useSelector(getContacts);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const handleChange = e => {
     const { name, value } = e.target;

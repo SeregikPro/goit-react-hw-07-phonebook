@@ -1,24 +1,21 @@
 import { Box } from 'components/Box';
 import ContactItem from 'components/ContactItem';
 import { useDispatch, useSelector } from 'react-redux';
-// import { removeContact, getFilter } from 'redux/contactsSlice';
-import { fetchContacts, removeContact } from 'redux/contactOperations';
+import { removeContact } from 'redux/contactOperations';
 import {
   getContacts,
-  getLoadingStatus,
-  getFilter,
+  // getLoadingStatus,
+  // getFilter,
 } from 'redux/contactSelectors';
 
 const ContactList = () => {
   const dispatch = useDispatch();
 
   const contacts = useSelector(getContacts);
-  const loading = useSelector(getLoadingStatus);
-  const filter = useSelector(getFilter);
+  // const loading = useSelector(getLoadingStatus);
+  // const filter = useSelector(getFilter);
 
-  const filteredContacts = contacts.filter(e =>
-    e.name.toLowerCase().includes(filter.toLowerCase())
-  );
+  const filteredContacts = contacts;
 
   const deleteContact = id => {
     dispatch(removeContact(id));
@@ -31,7 +28,7 @@ const ContactList = () => {
           key={id}
           id={id}
           name={name}
-          number={phone}
+          phone={phone}
           deleteContact={deleteContact}
         />
       ))}
