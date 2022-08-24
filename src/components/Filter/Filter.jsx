@@ -1,15 +1,15 @@
 import React from 'react';
 import { Input, Title } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilter } from 'redux/contactSelectors';
-import { setFilter } from 'redux/filterSlice';
+// import { getFilter } from 'redux/contactSelectors';
+import { setFilter, getFilter } from 'redux/filterSlice';
 
 const Filter = () => {
   const dispatch = useDispatch();
   const filter = useSelector(getFilter);
 
   const handleFilter = e => {
-    dispatch(setFilter(e.target.value.toLowerCase()));
+    dispatch(setFilter(e.target.value));
   };
 
   return (

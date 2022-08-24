@@ -1,10 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
-import { fetchContacts } from 'redux/contactOperations';
 import { addContact } from 'redux/contactOperations';
 import { getContacts } from 'redux/contactSelectors';
-// import { addContact, getContacts } from 'redux/contactsSlice';
-import { nanoid } from 'nanoid';
 import { Box } from 'components/Box';
 import { Input, Title } from './ContactForm.styled';
 import Button from 'components/Button';
@@ -16,10 +13,6 @@ const ContactForm = () => {
   const dispatch = useDispatch();
 
   const contacts = useSelector(getContacts);
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -34,7 +27,7 @@ const ContactForm = () => {
         break;
 
       default:
-        return;
+        break;
     }
   };
 
@@ -54,10 +47,12 @@ const ContactForm = () => {
       return;
     }
 
-    const contact = { id: nanoid(), name, phone };
+    const newContact = {
+      name,
+      phone,
+    };
 
-    dispatch(addContact(contact));
-    // addContactApi(contact).then(res => console.log('res :>>', res));
+    dispatch(addContact(newContact));
     reset();
   };
 

@@ -3,5 +3,5 @@ import contactsReducer from './contactsSlice';
 
 export const store = configureStore({
   reducer: { contacts: contactsReducer },
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(),
+  // middleware: getDefaultMiddleware => getDefaultMiddleware().concat(),
 });
