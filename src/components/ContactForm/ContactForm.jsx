@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { fetchContacts } from 'redux/contactOperations';
 import { addContact } from 'redux/contactOperations';
-import { addContactApi } from 'services/mockApi';
+import { getContacts } from 'redux/contactSelectors';
 // import { addContact, getContacts } from 'redux/contactsSlice';
 import { nanoid } from 'nanoid';
 import { Box } from 'components/Box';
@@ -11,9 +11,11 @@ import Button from 'components/Button';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
   const dispatch = useDispatch();
+
+  const contacts = useSelector(getContacts);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -23,8 +25,8 @@ const ContactForm = () => {
         setName(value);
         break;
 
-      case 'number':
-        setNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
 
       default:
@@ -32,23 +34,23 @@ const ContactForm = () => {
     }
   };
 
-  // const allContactNames = useSelector(getContacts).map(contact => contact.name);
+  const allContactNames = contacts.map(contact => contact.name);
 
-  // const checkDuplicates = name => {
-  //   if (allContactNames.includes(name)) {
-  //     alert(`${name} is already in contacts.`);
-  //     return true;
-  //   }
-  // };
+  const checkDuplicates = name => {
+    if (allContactNames.includes(name)) {
+      alert(`${name} is already in contacts.`);
+      return true;
+    }
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    // if (checkDuplicates(name)) {
-    //   return;
-    // }
+    if (checkDuplicates(name)) {
+      return;
+    }
 
-    const contact = { id: nanoid(), name, number };
+    const contact = { id: nanoid(), name, phone };
 
     dispatch(addContact(contact));
     // addContactApi(contact).then(res => console.log('res :>>', res));
@@ -57,7 +59,7 @@ const ContactForm = () => {
 
   const reset = () => {
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   return (
@@ -84,8 +86,8 @@ const ContactForm = () => {
         <Title>Number</Title>
         <Input
           type="tel"
-          name="number"
-          value={number}
+          name="phone"
+          value={phone}
           onChange={handleChange}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"

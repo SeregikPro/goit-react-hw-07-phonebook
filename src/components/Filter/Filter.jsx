@@ -1,22 +1,23 @@
 import React from 'react';
 import { Input, Title } from './Filter.styled';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { setFilter, getFilter } from 'redux/contactsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFilter } from 'redux/contactSelectors';
+import { setFilter } from 'redux/filterSlice';
 
 const Filter = () => {
-  // const dispatch = useDispatch();
-  // const filter = useSelector(getFilter);
+  const dispatch = useDispatch();
+  const filter = useSelector(getFilter);
 
-  // const handleFilter = e => {
-  //   dispatch(setFilter(e.target.value.toLowerCase()));
-  // };
+  const handleFilter = e => {
+    dispatch(setFilter(e.target.value.toLowerCase()));
+  };
 
   return (
     <label>
       <Title>Find contacts by name</Title>
       <Input
-        // value={filter}
-        // onChange={handleFilter}
+        value={filter}
+        onChange={handleFilter}
         placeholder="Type to search"
       />
     </label>

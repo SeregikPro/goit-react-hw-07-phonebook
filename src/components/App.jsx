@@ -3,12 +3,19 @@ import { Box } from './Box';
 import ContactList from './ContactList';
 import ContactForm from './ContactForm';
 import Filter from './Filter';
-// import { getContacts } from 'redux/useSelectors';
+import { useDispatch } from 'react-redux';
+import { fetchContacts } from 'redux/contactOperations';
 
 const App = () => {
-  // useEffect(() => {
-  //   getContacts();
-  // }, []);
+  const dispatch = useDispatch();
+
+  // const isExistContacts = useSelector(state =>
+  //   Boolean(state.contacts.items.length)
+  // );
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center" p={5}>
@@ -25,7 +32,7 @@ const App = () => {
       </Box>
       <Box width="300px">
         <h2>Contacts</h2>
-        {/* <Filter /> */}
+        <Filter />
         <ContactList />
       </Box>
     </Box>
